@@ -1,15 +1,19 @@
 package goart
 
 import (
-	"encoding/json"
+	"embed"
 	"net/http"
-	"net/url"
 	"strconv"
 )
 
 type ImageServer struct {
 	http.Handler
 }
+
+var (
+	//go:embed "static/*"
+	staticFS embed.FS
+)
 
 func CreateImageServer(database *ImageDatabase) *ImageServer {
 	server := &ImageServer{}
@@ -20,24 +24,28 @@ func CreateImageServer(database *ImageDatabase) *ImageServer {
 
 func createRouter(database *ImageDatabase) *http.ServeMux {
 	imgSrv := http.FileServer(http.FS(database.root))
+	staticSrv := http.FileServer(http.FS(staticFS))
 	router := http.NewServeMux()
-	router.Handle("/static/", http.StripPrefix("/static/", imgSrv))
-	getList := func(w http.ResponseWriter, r *http.Request) {
-		limit, offset := getLimitOffset(r.URL.Query())
-		json.NewEncoder(w).Encode(database.GetImages(limit, offset))
+	router.Handle("/image/", http.StripPrefix("/image/", imgSrv))
+	router.Handle("/static/", staticSrv)
+	render, err := Browser()
+	if err != nil {
+		return router
 	}
-	router.HandleFunc("/list", getList)
+	getBrowser := func(w http.ResponseWriter, r *http.Request) {
+		page, err := strconv.Atoi(r.URL.Query().Get("page"))
+		if err != nil {
+			page = 0
+		}
+		images := database.GetImages(10, 10*page)
+		if len(images) == 0 {
+			w.WriteHeader(http.StatusNotFound)
+			return
+		} else if len(images) < 10 {
+			page = -1
+		}
+		render(w, images, page)
+	}
+	router.HandleFunc("/browser", getBrowser)
 	return router
-}
-
-func getLimitOffset(query url.Values) (limit, offset int) {
-	limit, err := strconv.Atoi(query.Get("limit"))
-	if err != nil {
-		limit = 10
-	}
-	offset, err = strconv.Atoi(query.Get("offset"))
-	if err != nil {
-		offset = 0
-	}
-	return
 }

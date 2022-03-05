@@ -1,15 +1,19 @@
 package goart_test
 
 import (
-	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"testing"
-
-	"github.com/abhemanyus/goart"
 )
 
-func assertError(t testing.TB, got error, want error) {
+func assertStatusCode(t testing.TB, got, want int) {
+	t.Helper()
+	if got != want {
+		t.Fatalf("want error %d, but got %d", want, got)
+	}
+}
+
+func assertError(t testing.TB, got, want error) {
 	t.Helper()
 	if got != want {
 		t.Fatalf("want error %q, but got %q", want, got)
@@ -30,10 +34,4 @@ func assertLength(t testing.TB, want, got int) {
 	if got != want {
 		t.Errorf("got incorrect number of images. Wanted %d, got %d", want, got)
 	}
-}
-
-func jsonToList(response *httptest.ResponseRecorder) (goart.ImageList, error) {
-	var images goart.ImageList
-	err := json.NewDecoder(response.Body).Decode(&images)
-	return images, err
 }

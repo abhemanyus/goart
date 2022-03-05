@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Browser</title>
+</head>
+<body>
+    <ul>
+        
+        <li>
+            <img src="/image/one.png" alt="one.png">
+        </li>
+        
+        <li>
+            <img src="/image/safe/one.png" alt="safe/one.png">
+        </li>
+        
+        <li>
+            <img src="/image/two.png" alt="two.png">
+        </li>
+        
+        <li>
+            <img src="/image/unsafe/one.jpg" alt="unsafe/one.jpg">
+        </li>
+        
+    </ul>
+    <a href="/browser?page=0" data-disable="true">Next</a>
+</body>
+</html>
