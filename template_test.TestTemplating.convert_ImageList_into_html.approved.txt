@@ -11,21 +11,18 @@
     <ul>
         
         <li>
-            <img src="/image/picOne.jpg" alt="picOne.jpg">
+            <img src="/image/picOne.jpg" alt="picOne.jpg" loading="lazy">
         </li>
         
         <li>
-            <img src="/image/picTwo.png" alt="picTwo.png">
+            <img src="/image/picTwo.png" alt="picTwo.png" loading="lazy">
         </li>
         
         <li>
-            <img src="/image/picThree.webp" alt="picThree.webp">
+            <img src="/image/picThree.webp" alt="picThree.webp" loading="lazy">
         </li>
         
-        <li>
-            <a href="/browser?page=1" data-disable="false">Next</a>
-        </li>
     </ul>
-    <script src="/static/browser.js"></script>
+    <a href="/?page=1" data-disable="false">></a>
 </body>
 </html>

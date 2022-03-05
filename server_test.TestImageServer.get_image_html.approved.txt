@@ -11,25 +11,22 @@
     <ul>
         
         <li>
-            <img src="/image/one.png" alt="one.png">
+            <img src="/image/one.png" alt="one.png" loading="lazy">
         </li>
         
         <li>
-            <img src="/image/safe/one.png" alt="safe/one.png">
+            <img src="/image/safe/one.png" alt="safe/one.png" loading="lazy">
         </li>
         
         <li>
-            <img src="/image/two.png" alt="two.png">
+            <img src="/image/two.png" alt="two.png" loading="lazy">
         </li>
         
         <li>
-            <img src="/image/unsafe/one.jpg" alt="unsafe/one.jpg">
+            <img src="/image/unsafe/one.jpg" alt="unsafe/one.jpg" loading="lazy">
         </li>
         
-        <li>
-            <a href="/browser?page=0" data-disable="true">Next</a>
-        </li>
     </ul>
-    <script src="/static/browser.js"></script>
+    <a href="/?page=0" data-disable="true">></a>
 </body>
 </html>

@@ -16,6 +16,9 @@ ul {
     flex-direction: column;
     scroll-snap-type: y mandatory;
     overflow-y: scroll;
+    scroll-behavior: smooth;
+    scroll-padding-top: 0;
+    scroll-margin-top: 0;
 }
 
 li {
@@ -34,20 +37,23 @@ img {
 }
 
 a {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    border-radius: 5rem;
+    background: #3336;
     text-align: center;
-    height: 5rem;
     font-size: 3rem;
+    height: 3rem;
+    width: 3rem;
+    line-height: 3rem;
     font-weight: bold;
     color: white;
     text-decoration: none;
     cursor: pointer;
+    box-shadow: 0px 0px 4px black;;
 }
 
 a[data-disable="true"] {
-    cursor: default;
-    pointer-events: none;
-    color: gray;
+    display: none;
 }

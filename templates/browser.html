@@ -11,13 +11,10 @@
     <ul>
         {{range .List}}
         <li>
-            <img src="/image/{{.}}" alt="{{.}}">
+            <img src="/image/{{.}}" alt="{{.}}" loading="lazy">
         </li>
         {{end}}
-        <li>
-            <a href="/browser?page={{.Next}}" data-disable="{{.End}}">Next</a>
-        </li>
     </ul>
-    <script src="/static/browser.js"></script>
+    <a href="/?page={{.Next}}" data-disable="{{.End}}">></a>
 </body>
 </html>

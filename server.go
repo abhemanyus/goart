@@ -46,6 +46,6 @@ func createRouter(database *ImageDatabase) *http.ServeMux {
 		}
 		render(w, images, page)
 	}
-	router.HandleFunc("/browser", getBrowser)
+	router.HandleFunc("/", getBrowser)
 	return router
 }
