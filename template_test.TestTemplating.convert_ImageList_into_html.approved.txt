@@ -22,8 +22,10 @@
             <img src="/image/picThree.webp" alt="picThree.webp">
         </li>
         
+        <li>
+            <a href="/browser?page=1" data-disable="false">Next</a>
+        </li>
     </ul>
-    <a href="/browser?page=1" data-disable="false">Next</a>
     <script src="/static/browser.js"></script>
 </body>
 </html>

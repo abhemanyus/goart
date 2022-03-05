@@ -14,8 +14,10 @@
             <img src="/image/{{.}}" alt="{{.}}">
         </li>
         {{end}}
+        <li>
+            <a href="/browser?page={{.Next}}" data-disable="{{.End}}">Next</a>
+        </li>
     </ul>
-    <a href="/browser?page={{.Next}}" data-disable="{{.End}}">Next</a>
     <script src="/static/browser.js"></script>
 </body>
 </html>

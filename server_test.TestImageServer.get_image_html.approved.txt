@@ -26,8 +26,10 @@
             <img src="/image/unsafe/one.jpg" alt="unsafe/one.jpg">
         </li>
         
+        <li>
+            <a href="/browser?page=0" data-disable="true">Next</a>
+        </li>
     </ul>
-    <a href="/browser?page=0" data-disable="true">Next</a>
     <script src="/static/browser.js"></script>
 </body>
 </html>
