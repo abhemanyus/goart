@@ -17,8 +17,6 @@ ul {
     scroll-snap-type: y mandatory;
     overflow-y: scroll;
     scroll-behavior: smooth;
-    scroll-padding-top: 0;
-    scroll-margin-top: 0;
 }
 
 li {
@@ -29,6 +27,7 @@ li {
 
 img {
     display: block;
+    min-height: 30vh;
     max-height: 100%;
     max-width: 100%;
     object-fit: contain;

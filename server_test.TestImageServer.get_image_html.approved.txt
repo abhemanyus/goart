@@ -27,6 +27,6 @@
         </li>
         
     </ul>
-    <a href="/?page=0" data-disable="true">></a>
+    <a href="/?page=0#" data-disable="true">></a>
 </body>
 </html>
