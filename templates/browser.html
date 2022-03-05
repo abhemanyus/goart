@@ -9,14 +9,11 @@
 </head>
 <body>
     <ul>
-        {{range .List}}
+        {{range .}}
         <li>
             <img src="/image/{{.}}" alt="{{.}}">
         </li>
         {{end}}
-        <li>
-            <a href="/browser?page={{.Next}}" data-disable="{{.End}}">Next</a>
-        </li>
     </ul>
     <script src="/static/browser.js"></script>
 </body>

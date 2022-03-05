@@ -1,0 +1,1 @@
+const scroller = document.querySelector("ul")

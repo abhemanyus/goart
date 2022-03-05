@@ -2,7 +2,9 @@ package goart
 
 import (
 	"embed"
+	"encoding/json"
 	"net/http"
+	"net/url"
 	"strconv"
 )
 
@@ -28,24 +30,41 @@ func createRouter(database *ImageDatabase) *http.ServeMux {
 	router := http.NewServeMux()
 	router.Handle("/image/", http.StripPrefix("/image/", imgSrv))
 	router.Handle("/static/", staticSrv)
+	if database == nil {
+		return router
+	}
+	router.HandleFunc("/list", createAPI(database))
 	render, err := Browser()
 	if err != nil {
 		return router
 	}
 	getBrowser := func(w http.ResponseWriter, r *http.Request) {
-		page, err := strconv.Atoi(r.URL.Query().Get("page"))
-		if err != nil {
-			page = 0
-		}
-		images := database.GetImages(10, 10*page)
-		if len(images) == 0 {
-			w.WriteHeader(http.StatusNotFound)
-			return
-		} else if len(images) < 10 {
-			page = -1
-		}
-		render(w, images, page)
+		images := database.GetImages(10, 0)
+		render(w, images)
 	}
-	router.HandleFunc("/browser", getBrowser)
+	router.HandleFunc("/", getBrowser)
 	return router
+}
+
+func createAPI(database *ImageDatabase) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		limit, offset := getLimitOffset(r.URL.Query())
+		images := database.GetImages(limit, offset)
+		err := json.NewEncoder(w).Encode(images)
+		if err != nil {
+			w.WriteHeader(http.StatusNotFound)
+		}
+	}
+}
+
+func getLimitOffset(query url.Values) (limit, offset int) {
+	limit, err := strconv.Atoi(query.Get("limit"))
+	if err != nil {
+		limit = 10
+	}
+	offset, err = strconv.Atoi(query.Get("offset"))
+	if err != nil {
+		offset = 0
+	}
+	return
 }

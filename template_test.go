@@ -18,7 +18,7 @@ func TestTemplating(t *testing.T) {
 		buf := bytes.Buffer{}
 		render, err := goart.Browser()
 		assertError(t, err, nil)
-		err = render(&buf, imageList, 0)
+		err = render(&buf, imageList)
 		assertError(t, err, nil)
 		approvals.VerifyString(t, buf.String())
 	})
